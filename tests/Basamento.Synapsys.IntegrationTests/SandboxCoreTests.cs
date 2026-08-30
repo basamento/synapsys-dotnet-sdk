@@ -25,7 +25,7 @@ public sealed class SandboxCoreTests
         var password = RequiredEnvironment("SYNAPSYS_SANDBOX_PASSWORD");
         var baseUri = NormalizeCoreUrl(
             Environment.GetEnvironmentVariable("SYNAPSYS_SANDBOX_CORE_URL") ??
-            "https://core.synapsys.sandbox.jmzworks.it");
+            "http://localhost:8080");
         var cancellationToken = TestContext.Current.CancellationToken;
         var cookies = new CookieContainer();
         using var handler = new HttpClientHandler
