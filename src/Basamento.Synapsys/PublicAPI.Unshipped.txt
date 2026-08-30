@@ -6,16 +6,11 @@ Basamento.Synapsys.ProcessState.Running = 1 -> Basamento.Synapsys.ProcessState
 Basamento.Synapsys.ProcessState.Stopping = 2 -> Basamento.Synapsys.ProcessState
 Basamento.Synapsys.ProcessStatus
 Basamento.Synapsys.ProcessStatus.AcknowledgedToken.get -> long
-Basamento.Synapsys.ProcessStatus.AcknowledgedToken.init -> void
 Basamento.Synapsys.ProcessStatus.Name.get -> string!
-Basamento.Synapsys.ProcessStatus.Name.init -> void
-Basamento.Synapsys.ProcessStatus.ProcessStatus(string! Name, Basamento.Synapsys.ProcessType Type, Basamento.Synapsys.ProcessState State, long AcknowledgedToken, long? RunId) -> void
+Basamento.Synapsys.ProcessStatus.ProcessStatus(string! name, Basamento.Synapsys.ProcessType type, Basamento.Synapsys.ProcessState state, long acknowledgedToken, long? runId) -> void
 Basamento.Synapsys.ProcessStatus.RunId.get -> long?
-Basamento.Synapsys.ProcessStatus.RunId.init -> void
 Basamento.Synapsys.ProcessStatus.State.get -> Basamento.Synapsys.ProcessState
-Basamento.Synapsys.ProcessStatus.State.init -> void
 Basamento.Synapsys.ProcessStatus.Type.get -> Basamento.Synapsys.ProcessType
-Basamento.Synapsys.ProcessStatus.Type.init -> void
 Basamento.Synapsys.ProcessType
 Basamento.Synapsys.ProcessType.Endless = 0 -> Basamento.Synapsys.ProcessType
 Basamento.Synapsys.ProcessType.Progressive = 1 -> Basamento.Synapsys.ProcessType

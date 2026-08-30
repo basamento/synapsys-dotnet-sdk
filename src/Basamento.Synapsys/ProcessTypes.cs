@@ -37,15 +37,40 @@ public enum SynapsysLogSource
 }
 
 /// <summary>Provides a thread-safe snapshot of one registered process.</summary>
-/// <param name="Name">The unique process name.</param>
-/// <param name="Type">The process execution model.</param>
-/// <param name="State">The current execution state.</param>
-/// <param name="AcknowledgedToken">The newest handled Core command token.</param>
-/// <param name="RunId">The active or most recently assigned opaque Core run identifier.</param>
-public sealed record ProcessStatus(
-    string Name,
-    ProcessType Type,
-    ProcessState State,
-    long AcknowledgedToken,
-    long? RunId);
+public sealed class ProcessStatus
+{
+    /// <summary>Initializes a process-status snapshot.</summary>
+    /// <param name="name">The unique process name.</param>
+    /// <param name="type">The process execution model.</param>
+    /// <param name="state">The current execution state.</param>
+    /// <param name="acknowledgedToken">The newest handled Core command token.</param>
+    /// <param name="runId">The active or most recently assigned opaque Core run identifier.</param>
+    public ProcessStatus(
+        string name,
+        ProcessType type,
+        ProcessState state,
+        long acknowledgedToken,
+        long? runId)
+    {
+        Name = name;
+        Type = type;
+        State = state;
+        AcknowledgedToken = acknowledgedToken;
+        RunId = runId;
+    }
 
+    /// <summary>Gets the unique process name.</summary>
+    public string Name { get; }
+
+    /// <summary>Gets the process execution model.</summary>
+    public ProcessType Type { get; }
+
+    /// <summary>Gets the current execution state.</summary>
+    public ProcessState State { get; }
+
+    /// <summary>Gets the newest handled Core command token.</summary>
+    public long AcknowledgedToken { get; }
+
+    /// <summary>Gets the active or most recently assigned opaque Core run identifier.</summary>
+    public long? RunId { get; }
+}

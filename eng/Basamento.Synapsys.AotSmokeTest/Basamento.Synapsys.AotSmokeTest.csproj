@@ -3,9 +3,10 @@
     <OutputType>Exe</OutputType>
     <PublishAot>true</PublishAot>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- Native AOT compiler packages are RID-specific; the dedicated CI job restores its target RID. -->
+    <RestorePackagesWithLockFile>false</RestorePackagesWithLockFile>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../src/Basamento.Synapsys/Basamento.Synapsys.csproj" />
   </ItemGroup>
 </Project>
-
