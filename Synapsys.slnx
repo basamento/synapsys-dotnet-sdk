@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Basamento.Synapsys/Basamento.Synapsys.csproj" />
+    <Project Path="src/Basamento.Synapsys.Extensions.Hosting/Basamento.Synapsys.Extensions.Hosting.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Basamento.Synapsys.Tests/Basamento.Synapsys.Tests.csproj" />
+    <Project Path="tests/Basamento.Synapsys.Extensions.Hosting.Tests/Basamento.Synapsys.Extensions.Hosting.Tests.csproj" />
+    <Project Path="tests/Basamento.Synapsys.IntegrationTests/Basamento.Synapsys.IntegrationTests.csproj" />
+  </Folder>
+  <Folder Name="/eng/">
+    <Project Path="eng/Basamento.Synapsys.AotSmokeTest/Basamento.Synapsys.AotSmokeTest.csproj" />
+  </Folder>
+</Solution>
+

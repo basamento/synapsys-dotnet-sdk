@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+          cache: true
+          cache-dependency-path: "**/packages.lock.json"
+      - name: Restore locked dependencies
+        run: dotnet restore Synapsys.slnx --locked-mode --configfile NuGet.Config
+      - name: Verify formatting
+        run: dotnet format Synapsys.slnx --verify-no-changes --no-restore
+      - name: Build
+        run: dotnet build Synapsys.slnx --configuration Release --no-restore
+      - name: Test
+        run: dotnet test Synapsys.slnx --configuration Release --no-build --no-restore --collect:"XPlat Code Coverage" --results-directory artifacts/test-results
+      - name: Audit dependencies
+        run: dotnet list Synapsys.slnx package --vulnerable --include-transitive
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet restore Synapsys.slnx --locked-mode --configfile NuGet.Config
+      - run: dotnet build Synapsys.slnx --configuration Release --no-restore
+      - name: Pack and validate NuGet artifacts
+        run: |
+          dotnet pack src/Basamento.Synapsys/Basamento.Synapsys.csproj --configuration Release --no-build --output artifacts/packages
+          dotnet pack src/Basamento.Synapsys.Extensions.Hosting/Basamento.Synapsys.Extensions.Hosting.csproj --configuration Release --no-build --output artifacts/packages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: |
+            artifacts/packages/*.nupkg
+            artifacts/packages/*.snupkg
+          if-no-files-found: error
+
+  native-aot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet restore eng/Basamento.Synapsys.AotSmokeTest/Basamento.Synapsys.AotSmokeTest.csproj --runtime linux-x64 --force-evaluate --configfile NuGet.Config
+      - name: Publish Native AOT smoke application
+        run: dotnet publish eng/Basamento.Synapsys.AotSmokeTest/Basamento.Synapsys.AotSmokeTest.csproj --configuration Release --no-restore --runtime linux-x64 --output artifacts/aot
+      - name: Run Native AOT smoke application
+        run: ./artifacts/aot/Basamento.Synapsys.AotSmokeTest

@@ -1,0 +1,83 @@
+#nullable enable
+Basamento.Synapsys.ProcessState
+Basamento.Synapsys.ProcessState.Failed = 3 -> Basamento.Synapsys.ProcessState
+Basamento.Synapsys.ProcessState.Idle = 0 -> Basamento.Synapsys.ProcessState
+Basamento.Synapsys.ProcessState.Running = 1 -> Basamento.Synapsys.ProcessState
+Basamento.Synapsys.ProcessState.Stopping = 2 -> Basamento.Synapsys.ProcessState
+Basamento.Synapsys.ProcessStatus
+Basamento.Synapsys.ProcessStatus.AcknowledgedToken.get -> long
+Basamento.Synapsys.ProcessStatus.AcknowledgedToken.init -> void
+Basamento.Synapsys.ProcessStatus.Name.get -> string!
+Basamento.Synapsys.ProcessStatus.Name.init -> void
+Basamento.Synapsys.ProcessStatus.ProcessStatus(string! Name, Basamento.Synapsys.ProcessType Type, Basamento.Synapsys.ProcessState State, long AcknowledgedToken, long? RunId) -> void
+Basamento.Synapsys.ProcessStatus.RunId.get -> long?
+Basamento.Synapsys.ProcessStatus.RunId.init -> void
+Basamento.Synapsys.ProcessStatus.State.get -> Basamento.Synapsys.ProcessState
+Basamento.Synapsys.ProcessStatus.State.init -> void
+Basamento.Synapsys.ProcessStatus.Type.get -> Basamento.Synapsys.ProcessType
+Basamento.Synapsys.ProcessStatus.Type.init -> void
+Basamento.Synapsys.ProcessType
+Basamento.Synapsys.ProcessType.Endless = 0 -> Basamento.Synapsys.ProcessType
+Basamento.Synapsys.ProcessType.Progressive = 1 -> Basamento.Synapsys.ProcessType
+Basamento.Synapsys.SynapsysConfigurationException
+Basamento.Synapsys.SynapsysConfigurationException.SynapsysConfigurationException(string! message) -> void
+Basamento.Synapsys.SynapsysConfigurationException.SynapsysConfigurationException(string! message, System.Exception! innerException) -> void
+Basamento.Synapsys.SynapsysLogSource
+Basamento.Synapsys.SynapsysLogSource.StandardError = 1 -> Basamento.Synapsys.SynapsysLogSource
+Basamento.Synapsys.SynapsysLogSource.StandardOutput = 0 -> Basamento.Synapsys.SynapsysLogSource
+Basamento.Synapsys.SynapsysOptions
+Basamento.Synapsys.SynapsysOptions.CaptureConsole.get -> bool
+Basamento.Synapsys.SynapsysOptions.CaptureConsole.set -> void
+Basamento.Synapsys.SynapsysOptions.ConnectTimeout.get -> System.TimeSpan
+Basamento.Synapsys.SynapsysOptions.ConnectTimeout.set -> void
+Basamento.Synapsys.SynapsysOptions.CoreToken.get -> string?
+Basamento.Synapsys.SynapsysOptions.CoreToken.set -> void
+Basamento.Synapsys.SynapsysOptions.CoreUrl.get -> System.Uri?
+Basamento.Synapsys.SynapsysOptions.CoreUrl.set -> void
+Basamento.Synapsys.SynapsysOptions.Enabled.get -> bool
+Basamento.Synapsys.SynapsysOptions.Enabled.set -> void
+Basamento.Synapsys.SynapsysOptions.FailFast.get -> bool
+Basamento.Synapsys.SynapsysOptions.FailFast.set -> void
+Basamento.Synapsys.SynapsysOptions.HeartbeatInterval.get -> System.TimeSpan
+Basamento.Synapsys.SynapsysOptions.HeartbeatInterval.set -> void
+Basamento.Synapsys.SynapsysOptions.Host.get -> string?
+Basamento.Synapsys.SynapsysOptions.Host.set -> void
+Basamento.Synapsys.SynapsysOptions.RequestTimeout.get -> System.TimeSpan
+Basamento.Synapsys.SynapsysOptions.RequestTimeout.set -> void
+Basamento.Synapsys.SynapsysOptions.ShutdownTimeout.get -> System.TimeSpan
+Basamento.Synapsys.SynapsysOptions.ShutdownTimeout.set -> void
+Basamento.Synapsys.SynapsysOptions.SynapsysOptions() -> void
+Basamento.Synapsys.SynapsysOptions.WorkerName.get -> string?
+Basamento.Synapsys.SynapsysOptions.WorkerName.set -> void
+Basamento.Synapsys.SynapsysProcessOptions
+Basamento.Synapsys.SynapsysProcessOptions.OnStop.get -> System.Action?
+Basamento.Synapsys.SynapsysProcessOptions.OnStop.set -> void
+Basamento.Synapsys.SynapsysProcessOptions.OnStopAsync.get -> System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>?
+Basamento.Synapsys.SynapsysProcessOptions.OnStopAsync.set -> void
+Basamento.Synapsys.SynapsysProcessOptions.SynapsysProcessOptions() -> void
+Basamento.Synapsys.SynapsysStartupException
+Basamento.Synapsys.SynapsysStartupException.SynapsysStartupException(string! message, System.Exception? innerException = null) -> void
+Basamento.Synapsys.SynapsysWorker
+Basamento.Synapsys.SynapsysWorker.CreateLogger(string! processName, Microsoft.Extensions.Logging.ILogger? passthrough = null) -> Microsoft.Extensions.Logging.ILogger!
+Basamento.Synapsys.SynapsysWorker.CreateTextWriter(string! processName, Basamento.Synapsys.SynapsysLogSource source = Basamento.Synapsys.SynapsysLogSource.StandardOutput, System.IO.TextWriter? passthrough = null) -> System.IO.TextWriter!
+Basamento.Synapsys.SynapsysWorker.DisposeAsync() -> System.Threading.Tasks.ValueTask
+Basamento.Synapsys.SynapsysWorker.Processes.get -> System.Collections.Generic.IReadOnlyList<Basamento.Synapsys.ProcessStatus!>!
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Action! run) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Action! run, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Action<System.Threading.CancellationToken>! run) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Action<System.Threading.CancellationToken>! run, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! runAsync) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! runAsync, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Func<System.Threading.Tasks.Task!>! runAsync) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterEndless(string! name, System.Func<System.Threading.Tasks.Task!>! runAsync, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Action! run) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Action! run, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Action<System.Threading.CancellationToken>! run) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Action<System.Threading.CancellationToken>! run, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! runAsync) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task!>! runAsync, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Func<System.Threading.Tasks.Task!>! runAsync) -> void
+Basamento.Synapsys.SynapsysWorker.RegisterProgressive(string! name, System.Func<System.Threading.Tasks.Task!>! runAsync, Basamento.Synapsys.SynapsysProcessOptions! options) -> void
+Basamento.Synapsys.SynapsysWorker.StartAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Basamento.Synapsys.SynapsysWorker.StopAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Basamento.Synapsys.SynapsysWorker.SynapsysWorker(Basamento.Synapsys.SynapsysOptions! options, Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, System.Net.Http.HttpClient? httpClient = null) -> void

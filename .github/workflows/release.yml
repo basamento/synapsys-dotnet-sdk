@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-*"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: nuget
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Validate tag and derive immutable package version
+        shell: bash
+        run: |
+          if [[ ! "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid semantic version tag: $GITHUB_REF_NAME" >&2
+            exit 1
+          fi
+          echo "PACKAGE_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+      - name: Restore locked dependencies
+        run: dotnet restore Synapsys.slnx --locked-mode --configfile NuGet.Config
+      - name: Verify formatting
+        run: dotnet format Synapsys.slnx --verify-no-changes --no-restore
+      - name: Build
+        run: dotnet build Synapsys.slnx --configuration Release --no-restore -p:Version=${{ env.PACKAGE_VERSION }}
+      - name: Test
+        run: dotnet test Synapsys.slnx --configuration Release --no-build --no-restore -p:Version=${{ env.PACKAGE_VERSION }}
+      - name: Pack NuGet artifacts
+        run: |
+          dotnet pack src/Basamento.Synapsys/Basamento.Synapsys.csproj --configuration Release --no-build --output artifacts/packages -p:Version=${{ env.PACKAGE_VERSION }}
+          dotnet pack src/Basamento.Synapsys.Extensions.Hosting/Basamento.Synapsys.Extensions.Hosting.csproj --configuration Release --no-build --output artifacts/packages -p:Version=${{ env.PACKAGE_VERSION }}
+      - name: Obtain one-use NuGet.org credential
+        uses: NuGet/login@v1
+        id: nuget
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      - name: Publish immutable NuGet packages
+        shell: bash
+        run: |
+          for package in artifacts/packages/*.nupkg; do
+            dotnet nuget push "$package" --api-key "${{ steps.nuget.outputs.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json
+          done
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" artifacts/packages/*.nupkg artifacts/packages/*.snupkg --verify-tag --generate-notes --title "Synapsys .NET SDK ${{ env.PACKAGE_VERSION }}"
+
