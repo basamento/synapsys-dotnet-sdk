@@ -179,3 +179,5 @@ The optional live integration test creates and revokes a disposable Core worker 
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE).
+
+Copyright 2026 Julian Marzoli (Basamento).

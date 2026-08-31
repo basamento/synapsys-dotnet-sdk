@@ -4,8 +4,9 @@
     <RootNamespace>Basamento.Synapsys</RootNamespace>
     <PackageId>Basamento.Synapsys</PackageId>
     <Version>0.1.0-alpha.1</Version>
-    <Authors>Basamento</Authors>
+    <Authors>Julian Marzoli</Authors>
     <Company>Basamento</Company>
+    <Copyright>Copyright 2026 Julian Marzoli (Basamento)</Copyright>
     <Description>Framework-neutral .NET SDK for wiring application processes to Synapsys lifecycle control.</Description>
     <PackageTags>synapsys;worker;lifecycle;process;dotnet</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
