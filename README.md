@@ -13,6 +13,11 @@ Both packages target `net8.0`, use nullable reference types, and are designed fo
 
 ## Install
 
+> **Package availability:** The Synapsys .NET packages have not yet been
+> published to NuGet.org. The installation commands below will work after the
+> first package release. Until then, the SDK is available from this repository
+> as source code.
+
 Framework-neutral:
 
 ```shell
