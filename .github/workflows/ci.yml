@@ -23,7 +23,7 @@ jobs:
         with:
           dotnet-version: |
             8.0.x
-            10.0.400
+            10.0.404
           cache: true
           cache-dependency-path: "**/packages.lock.json"
       - name: Restore locked dependencies
@@ -45,7 +45,7 @@ jobs:
         with:
           dotnet-version: |
             8.0.x
-            10.0.400
+            10.0.404
       - run: dotnet restore Synapsys.slnx --locked-mode --configfile NuGet.Config
       - run: dotnet build Synapsys.slnx --configuration Release --no-restore
       - name: Pack and validate NuGet artifacts
@@ -68,7 +68,7 @@ jobs:
         with:
           dotnet-version: |
             8.0.x
-            10.0.400
+            10.0.404
       - run: dotnet restore eng/Basamento.Synapsys.AotSmokeTest/Basamento.Synapsys.AotSmokeTest.csproj --runtime linux-x64 --force-evaluate --configfile NuGet.Config
       - name: Publish Native AOT smoke application
         run: dotnet publish eng/Basamento.Synapsys.AotSmokeTest/Basamento.Synapsys.AotSmokeTest.csproj --configuration Release --no-restore --runtime linux-x64 --output artifacts/aot
