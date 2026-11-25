@@ -11,6 +11,10 @@ The repository contains two NuGet packages:
 
 Both packages target `net8.0`, use nullable reference types, and are designed for trimming and Native AOT where their dependencies permit it. ASP.NET Core and Worker Services can use the hosting package; console apps and other environments can use the core package directly. Legacy .NET Framework 4.x is not an initial target.
 
+The repository pins the .NET SDK version used for builds in `global.json` so
+locked restores remain reproducible. Update the SDK and lock files together when
+applying SDK updates.
+
 ## Install
 
 > **Package availability:** The Synapsys .NET packages have not yet been
